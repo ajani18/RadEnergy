@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node ./bin/www"
   },
+  "engines": {
+   "node": "8.9.1"
+ },
   "dependencies": {
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
@@ -20,9 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ajani18/AbhiRadProj-.git"
-  },
-  "scripts": {
-    "postinstall": "cd client && npm install"
+    "url": "hhttps://github.com/ajani18/RadEnergy.git"
+
   }
 }
