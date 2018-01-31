@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   //       res.render('index', { title: 'RAD Energy', data: data})
   //   }
   // });
-   res.render('index', { title: 'RAD Energy'});
+   res.render('index', { title: 'RAD Energy'}); //Goes to 
 });
 
 module.exports = router; //routes resoiblie from model to views

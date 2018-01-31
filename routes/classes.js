@@ -8,16 +8,16 @@ var MongoClient = require('mongodb').MongoClient
 
 /* GET home page. */
 router.get('/mrjones', function (req, res, next) {
-        res.render('index', {
+        res.render('classroom', {
             title: "Mr. Jones' Classroom Data"
         })
     });
 
 router.get('/makerspace', function (req, res, next) {
-       	res.render('index', {
+       	res.render('classroom', {
        		title: "Maker Space's Data"
        	})
-       
+
 	});
 
 

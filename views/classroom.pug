@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  div(class="centerDiv")
+    div(class="innerCenterDiv row")
+      div(id="filterSide" class="col-2")
+         button(type="button" class="btn btn-primary filter" onclick="graphHumidity()") Humidity
+         button(type="button" class="btn btn-primary filter" onclick="graphTemp()") Temperature 
+      div(id="chart" class="col-10")
+    div(class="innerCenterDiv row")
+      div(class="col-4")
+        h4 Live Feed
+        div(class="alert alert-warning" role="alert") Light: 
+          span(id="lightlf") 
+        div(class="alert alert-primary" role="alert") Humidity: 
+          span(id="humiditylf")
+        div(class="alert alert-danger" role="alert") Temperature: 
+          span(id="templf")
+        div(class="alert alert-success" role="alert") Occupancy: 
+          span(id="occupancylf")
+      div(class="col-4")
+        h4 Daily Stats 
+        
+      div(class="col-4")
+        h4 Recommendations 
+          
+      
+  script(src='/javascripts/d3.js')
+  script(src='/javascripts/queue.js')
+  script(src='/javascripts/dataVisual.js')

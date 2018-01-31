@@ -39,6 +39,11 @@ var bisectDate = d3.bisector(function (d) { return parseDate(d.timestamp); }).le
 
 // Set the ranges
 function graphData(err, data){
+  liveFeedLight(data[0].lightstatus)
+  liveFeedHumidity(data[0].humidity)
+  liveFeedTemp(data[0].temperature)
+  liveFeedOccupancy(data[0].occupancystatus)
+
   console.log(data.length);
   storedData = data;
   // graphLight(data);
@@ -271,7 +276,22 @@ function graphHumidity() {
 
 }
 
-function graphOneDay() {
+function liveFeedLight(lightLvL) {
+  d3.select("#lightlf")
+  .html(lightLvL)
+}
 
+function liveFeedHumidity(HumidityLvL) {
+  d3.select("#humiditylf")
+  .html(HumidityLvL)
+}
 
+function liveFeedTemp(TempLvL) {
+  d3.select("#templf")
+  .html(TempLvL)
+}
+
+function liveFeedOccupancy(OccupancyLvL) {
+  d3.select("#occupancylf")
+  .html(OccupancyLvL)
 }
