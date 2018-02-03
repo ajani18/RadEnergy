@@ -20,7 +20,7 @@ a {
 
 .innerCenterDiv {
 	margin: 0 auto;
-	width: 800px;
+	/* width: 800px; */
 }
 
  #chart {
@@ -35,3 +35,10 @@ a {
  #filterSide {
  	margin-top: 25px;
  }
+
+ /* #tracker {
+   float: right;
+   position: absolute;
+   right: 150px;
+   top: 75px;
+ } */

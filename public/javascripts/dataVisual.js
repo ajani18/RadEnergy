@@ -43,11 +43,18 @@ function graphData(err, data){
   liveFeedHumidity(data[0].humidity)
   liveFeedTemp(data[0].temperature)
   liveFeedOccupancy(data[0].occupancystatus)
+  dailyStats(data)
 
   console.log(data.length);
   storedData = data;
+
+  // var d = new Date(parseDate(data[0].timestamp));
+  // console.log(parseDate(data[0].timestamp).getMonth());
+
+
   // graphLight(data);
   // graphHumidity(data);
+
 
   var x = d3.time.scale().range([0, width]);
   var y = d3.scale.linear().range([height, 0]);
@@ -134,23 +141,23 @@ function graphData(err, data){
       .attr("x", 9)
       .attr("dy", ".35em");
 
-  svg.append("rect")
-      .attr("class", "overlay")
-      .attr("width", width)
-      .attr("height", height)
-      .on("mouseover", function () { focus.style("display", null); })
-      .on("mouseout", function () { focus.style("display", "none"); })
-      .on("mousemove", mousemove);
+  // svg.append("rect")
+  //     .attr("class", "overlay")
+  //     .attr("width", width)
+  //     .attr("height", height)
+  //     .on("mouseover", function () { focus.style("display", null); })
+  //     .on("mouseout", function () { focus.style("display", "none"); })
+  //     .on("mousemove", mousemove);
 
-  function mousemove() {
-      var x0 = x.invert(d3.mouse(this)[0]),
-          i = bisectDate(data, x0, 1),
-          d0 = data[i - 1],
-          d1 = data[i],
-          d = x0 - d0.timestamp > d1.timestamp - x0 ? d1 : d0;
-      focus.attr("transform", "translate(" + x(parseDate(d.timestamp)) + "," + y(d.temperature) + ")");
-      focus.select("text").text((d.temperature));
-  }
+  // function mousemove() {
+  //     var x0 = x.invert(d3.mouse(this)[0]),
+  //         i = bisectDate(data, x0, 1),
+  //         d0 = data[i - 1],
+  //         d1 = data[i],
+  //         d = x0 - d0.timestamp > d1.timestamp - x0 ? d1 : d0;
+  //     focus.attr("transform", "translate(" + x(parseDate(d.timestamp)) + "," + y(d.temperature) + ")");
+  //     focus.select("text").text((d.temperature));
+  // }
 
   // });
 }
@@ -295,3 +302,41 @@ function liveFeedOccupancy(OccupancyLvL) {
   d3.select("#occupancylf")
   .html(OccupancyLvL)
 }
+
+function dailyStats(data) {
+
+  var today = new Date();
+  console.log(today)
+  var docDate = parseDate(data[0].timestamp);
+
+  var sumTemp = 0;
+  var sumHumidity = 0;
+  var numDocs = 0;
+
+
+  while (docDate.getMonth() == today.getMonth() && docDate.getDate() == today.getDate() && docDate.getFullYear() == today.getFullYear()) {
+      sumTemp += data[numDocs].temperature;
+      sumHumidity += data[numDocs].humidity;
+      numDocs ++;
+
+      docDate = parseDate(data[numDocs].timestamp);
+
+
+  }
+  var AverageTemp = (sumTemp/numDocs)
+  var AverageHumidity = (sumHumidity/numDocs)
+   console.log(sumTemp/numDocs);
+   console.log(sumHumidity/numDocs);
+
+   d3.select("#AverageTemp")
+   .html(Math.round(AverageTemp*100) / 100).toFixed(2);
+
+   d3.select("#averageHumid")
+   .html(Math.round(AverageHumidity*100) / 100).toFixed(2);
+
+   // d3.select("#AverageHumidity")
+   // .html(AverageHumidity)
+
+
+ }
+//

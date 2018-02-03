@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
   h1= title
   p Welcome to #{title}
 
@@ -8,8 +9,12 @@ block content
     div(class="innerCenterDiv row")
       div(id="filterSide" class="col-2")
          button(type="button" class="btn btn-primary filter" onclick="graphHumidity()") Humidity
+         h4 Press Any Button to Change the Graph 
          button(type="button" class="btn btn-primary filter" onclick="graphTemp()") Temperature 
-      div(id="chart" class="col-10")
+      div(id="chart" class="col-7")
+      div(class="col-3" id="tracker")
+        div(class="alert alert-warning" role="alert") Total kWH Used: 
+          span(id="kWhUsed") 
     div(class="innerCenterDiv row")
       div(class="col-4")
         h4 Live Feed
@@ -23,6 +28,10 @@ block content
           span(id="occupancylf")
       div(class="col-4")
         h4 Daily Stats 
+        div(class="alert alert-danger" role="alert") Average Temperature:
+          span(id="AverageTemp")
+        div(class="alert alert-primary" role="alert") Average Humidity:
+          span(id="averageHumid")
         
       div(class="col-4")
         h4 Recommendations 
