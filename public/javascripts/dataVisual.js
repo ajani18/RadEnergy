@@ -43,7 +43,8 @@ function graphData(err, data){
   liveFeedHumidity(data[0].humidity)
   liveFeedTemp(data[0].temperature)
   liveFeedOccupancy(data[0].occupancystatus)
-  dailyStats(data)
+  dailyTemp(data)
+  dailyHumid(data)
 
   console.log(data.length);
   storedData = data;
@@ -100,7 +101,7 @@ function graphData(err, data){
   svg.append("path")
   .attr("class", "line")
   .attr("d", valueline(data))
-  .attr("stroke", "#FF00FF")
+  .attr("stroke", "#111111")
   .attr("fill", "none");
 
   // Add the X Axis
@@ -283,6 +284,65 @@ function graphHumidity() {
 
 }
 
+function dailyTemp(data) {
+
+  var today = new Date();
+  console.log(today)
+  var docDate = parseDate(data[0].timestamp);
+
+  var sumTemp = 0;
+  var numDocs = 0;
+
+
+  while (docDate.getMonth() == today.getMonth() && docDate.getDate() == today.getDate() && docDate.getFullYear() == today.getFullYear()) {
+      sumTemp += data[numDocs].temperature;
+      numDocs ++;
+
+      docDate = parseDate(data[numDocs].timestamp);
+
+
+  }
+  var AverageTemp = (sumTemp/numDocs)
+   console.log(sumTemp/numDocs);
+
+
+   d3.select("#AverageTemp")
+   .html(Math.round(AverageTemp*100) / 100)
+
+
+
+ }
+
+ function occupiedPressed() {
+    d3.select("#occupancylf")
+    .html("Occupied")
+ }
+
+
+function dailyHumid(data) {
+
+  var today = new Date();
+  console.log(today)
+  var docDate = parseDate(data[0].timestamp);
+
+  var sumHumidity = 0;
+  var numDocs = 0;
+
+  while (docDate.getMonth() == today.getMonth() && docDate.getDate() == today.getDate() && docDate.getFullYear() == today.getFullYear()) {
+      sumHumidity += data[numDocs].humidity;
+      numDocs ++;
+
+      docDate = parseDate(data[numDocs].timestamp);
+
+  }
+  var AverageHumidity = (sumHumidity/numDocs)
+   console.log(sumHumidity/numDocs);
+
+   d3.select("#averageHumid")
+   .html(Math.round(AverageHumidity*100) / 100)
+
+}
+
 function liveFeedLight(lightLvL) {
   d3.select("#lightlf")
   .html(lightLvL)
@@ -302,41 +362,3 @@ function liveFeedOccupancy(OccupancyLvL) {
   d3.select("#occupancylf")
   .html(OccupancyLvL)
 }
-
-function dailyStats(data) {
-
-  var today = new Date();
-  console.log(today)
-  var docDate = parseDate(data[0].timestamp);
-
-  var sumTemp = 0;
-  var sumHumidity = 0;
-  var numDocs = 0;
-
-
-  while (docDate.getMonth() == today.getMonth() && docDate.getDate() == today.getDate() && docDate.getFullYear() == today.getFullYear()) {
-      sumTemp += data[numDocs].temperature;
-      sumHumidity += data[numDocs].humidity;
-      numDocs ++;
-
-      docDate = parseDate(data[numDocs].timestamp);
-
-
-  }
-  var AverageTemp = (sumTemp/numDocs)
-  var AverageHumidity = (sumHumidity/numDocs)
-   console.log(sumTemp/numDocs);
-   console.log(sumHumidity/numDocs);
-
-   d3.select("#AverageTemp")
-   .html(Math.round(AverageTemp*100) / 100).toFixed(2);
-
-   d3.select("#averageHumid")
-   .html(Math.round(AverageHumidity*100) / 100).toFixed(2);
-
-   // d3.select("#AverageHumidity")
-   // .html(AverageHumidity)
-
-
- }
-//

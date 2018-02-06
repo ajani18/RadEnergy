@@ -18,20 +18,24 @@ block content
     div(class="innerCenterDiv row")
       div(class="col-4")
         h4 Live Feed
-        div(class="alert alert-warning" role="alert") Light: 
-          span(id="lightlf") 
-        div(class="alert alert-primary" role="alert") Humidity: 
-          span(id="humiditylf")
         div(class="alert alert-danger" role="alert") Temperature: 
           span(id="templf")
+        div(class="alert alert-primary" role="alert") Humidity: 
+              span(id="humiditylf")
+        div(class="alert alert-warning" role="alert") Light: 
+          span(id="lightlf") 
         div(class="alert alert-success" role="alert") Occupancy: 
           span(id="occupancylf")
+          span(id="Occupancy")
+        button(type="button" class="btn btn-primary filter" onclick="occupiedPressed()") Occupied 
+        button(type="button" class="btn btn-primary filter" onclick="UnoccupiedPressed()") Unoccupied 
       div(class="col-4")
         h4 Daily Stats 
         div(class="alert alert-danger" role="alert") Average Temperature:
           span(id="AverageTemp")
         div(class="alert alert-primary" role="alert") Average Humidity:
           span(id="averageHumid")
+  
         
       div(class="col-4")
         h4 Recommendations 
