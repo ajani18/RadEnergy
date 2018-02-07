@@ -45,6 +45,7 @@ function graphData(err, data){
   liveFeedOccupancy(data[0].occupancystatus)
   dailyTemp(data)
   dailyHumid(data)
+  percentageLights(data)
 
   console.log(data.length);
   storedData = data;
@@ -101,7 +102,7 @@ function graphData(err, data){
   svg.append("path")
   .attr("class", "line")
   .attr("d", valueline(data))
-  .attr("stroke", "#111111")
+  .attr("stroke", "#000000")
   .attr("fill", "none");
 
   // Add the X Axis
@@ -340,6 +341,65 @@ function dailyHumid(data) {
 
    d3.select("#averageHumid")
    .html(Math.round(AverageHumidity*100) / 100)
+
+}
+
+function percentageLights(data) {
+
+  var timeOn = 0;
+  var numDocs = 0;
+
+  var today = new Date();
+  console.log(today)
+  var docDate = parseDate(data[0].timestamp);
+
+  while (docDate.getMonth() == today.getMonth() && docDate.getDate() == today.getDate() && docDate.getFullYear() == today.getFullYear()) {
+
+
+    if (data[numDocs].lightstatus == "on") {
+      timeOn ++;
+    }
+
+    numDocs ++;
+
+    docDate = parseDate(data[numDocs].timestamp);
+
+  }
+
+  console.log(timeOn/numDocs);
+
+  percentOn = (timeOn/numDocs);
+
+  timePassed = parseDate(data[0].timestamp);
+
+  // console.log(timePassed);
+  timePassedHours = timePassed.getHours() * 60 //converts to minutes
+  timePassedMinutes = timePassed.getMinutes();
+  totalTimePassed = timePassedHours + timePassedMinutes //sum of minutes
+
+  totalTimeLightsOn = (percentOn * totalTimePassed) / 60//in terms of hours
+
+  //milliseconds since 12am 2/6
+
+
+  console.log(totalTimePassed); //sum of total minutes data has been collected
+  console.log(totalTimeLightsOn); //takes percentage of time to give amount of time on in hours
+
+  var wattsPerBulb = 60;
+  kWHUsed = ((wattsPerBulb*totalTimeLightsOn) / 1000);  //kwh in 1 day for 1 bulb
+  kWHUsedSum = kWHUsed * 36;
+  var costPerKWH = 0.12;
+  costPerDay = (kWHUsed * costPerKWH) * 36; //36 lightbulb
+
+  console.log(kWHUsed);
+  console.log(kWHUsedSum);
+  console.log(costPerDay);
+
+
+  // hoursOn = timePassedToday * percentOn
+
+  // console.log(hoursOn);
+
 
 }
 

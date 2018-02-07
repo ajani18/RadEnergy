@@ -47,18 +47,16 @@ a {
 
 h1 {
    text-align: center;
+   background-color:  #ff66ff;
  }
 
 #wrapper {
 
-  background-color: #00ff9d;
+  background-color:  #ff66ff;
 
 }
 
 #sidebar-wrapper {
-
-  background-color: #EADEDB;
-  color: green;
 
 }
 
@@ -67,5 +65,12 @@ h1 {
   color: black;
 
 }
+
+title {
+
+  background-color:  #d580ff;
+
+}
+
 
 /* class . id # */
