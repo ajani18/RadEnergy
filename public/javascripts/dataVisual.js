@@ -299,8 +299,7 @@ function dailyTemp(data) {
       sumTemp += data[numDocs].temperature;
       numDocs ++;
 
-      docDate = parseDate(data[numDocs].timestamp);
-
+      docDate = parseDate(data[numDocs].timestamp)
 
   }
   var AverageTemp = (sumTemp/numDocs)
