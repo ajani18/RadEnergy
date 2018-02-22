@@ -52,7 +52,14 @@ h1 {
 
 #wrapper {
 
-  background-color:  #ff66ff;
+    background-color:  #959ba5;
+
+}
+
+.x.axis line {
+
+  stroke-width: 2px;
+  stroke: #fff;
 
 }
 

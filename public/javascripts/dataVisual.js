@@ -19,6 +19,8 @@ height = 270 - margin.top - margin.bottom;
 var parseDate = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
 var bisectDate = d3.bisector(function (d) { return parseDate(d.timestamp); }).left;
 
+var svg = d3.select("#chart");
+
 // getData();
 //
 // function getData() {
@@ -69,13 +71,13 @@ function graphData(err, data){
   .orient("left").ticks(5);
 
   // Define the line
-  var valueline = d3.svg.line()
-  .x(function(d, i) {
-    // var date = new Date();
-    // console.log(date.getDate()  );
-    return x(parseDate(d.timestamp));
-  })
-  .y(function(d) { return y(d.temperature); });
+  // var valueline = d3.svg.line()
+  // .x(function(d, i) {
+  //   // var date = new Date();
+  //   // console.log(date.getDate()  );
+  //   return x(parseDate(d.timestamp));
+  // })
+  // .y(function(d) { return y(d.temperature); });
 
   // Adds the svg canvas
   var svg = d3.select("#chart")
@@ -99,11 +101,43 @@ function graphData(err, data){
   y.domain([0, d3.max(data, function(d) { return d.temperature; })]);
 
   // Add the valueline path.
-  svg.append("path")
-  .attr("class", "line")
-  .attr("d", valueline(data))
-  .attr("stroke", "#000000")
-  .attr("fill", "none");
+  var xValue = function (d) { return (parseDate(d.timestamp))};
+  var yValue = function (d) { return (d.temperature)};
+
+  var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+  svg.selectAll(".dot")
+      .data(data)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 5.5)
+      .attr("cx", function(d) { return x(parseDate(d.timestamp))})
+      .attr("cy", function(d) { return y(d.temperature)})
+      .style("fill", "blue")
+      .style("stroke", "black")
+      .on("mouseover", function(d) {
+        console.log(d.timestamp);
+          tooltip.transition()
+               .duration(200)
+               .style("opacity", .9);
+          tooltip.html(xValue(d)
+	        + ", " + yValue(d) + ")")
+               .style("left", (d3.event.pageX + 5) + "px")
+               .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(500)
+               .style("opacity", 0);
+      });
+
+  // svg.append("path")
+  // .attr("class", "line")
+  // .attr("d", valueline(data))
+  // .attr("stroke", "#000000")
+  // .attr("fill", "none");
 
   // Add the X Axis
   svg.append("g")
@@ -180,16 +214,51 @@ function graphTemp() {
   .orient("left").ticks(5);
 
   // Define the line
-  var valueline = d3.svg.line()
-  .x(function(d, i) {
-    // var date = new Date();
-    // console.log(date.getDate()  );
-    return x(parseDate(d.timestamp));
-  })
-  .y(function(d) { return y(d.temperature); });
+  // var valueline = d3.svg.line()
+  // .x(function(d, i) {
+  //   var date = new Date();
+  //   console.log(date.getDate()  );
+  //   return x(parseDate(d.timestamp));
+  // })
+  // .y(function(d) { return y(d.temperature); });
+
+  var xValue = function (d) { return (parseDate(d.timestamp))};
+  var yValue = function (d) { return (d.temperature)};
+
+  var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+  svg.selectAll(".dot")
+      .data(data)
+    .enter().append("circle")
+      .attr("class", "dot")
+      .attr("r", 5.5)
+      .attr("cx", function(d) { return x(parseDate(d.timestamp))})
+      .attr("cy", function(d) { return y(d.temperature)})
+      .style("fill", "blue")
+      .style("stroke", "black")
+      .on("mouseover", function(d) {
+        console.log(d.timestamp);
+          tooltip.transition()
+               .duration(200)
+               .style("opacity", .9);
+          tooltip.html(xValue(d)
+	        + ", " + yValue(d) + ")")
+               .style("left", (d3.event.pageX + 5) + "px")
+               .style("top", (d3.event.pageY - 28) + "px");
+      })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(500)
+               .style("opacity", 0);
+      });
+
+
+
 
   // Adds the svg canvas
-  var svg = d3.select("#chart");
+
   // d3.csv("/javascripts/energy.csv", function(error, data) { //indentation?
   //     data.forEach(function(d) {
   //         d.date  = parseDate(d.date);
@@ -239,7 +308,7 @@ function graphHumidity() {
   var yAxis = d3.svg.axis().scale(y)
   .orient("left").ticks(5);
 
-  // Define the line
+  //Define the line
   var valueline = d3.svg.line()
   .x(function(d, i) {
     // var date = new Date();
@@ -248,8 +317,41 @@ function graphHumidity() {
   })
   .y(function(d) { return y(d.humidity); });
 
+
+    var xValue = function (d) { return (parseDate(d.timestamp))};
+    var yValue = function (d) { return (d.humidity)};
+
+    var tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    svg.selectAll(".dot")
+        .data(data)
+      .enter().append("circle")
+        .attr("class", "dot")
+        .attr("r", 5.5)
+        .attr("cx", function(d) { return x(parseDate(d.timestamp))})
+        .attr("cy", function(d) { return y(d.humidity)})
+        .style("fill", "blue")
+        .style("stroke", "black")
+        .on("mouseover", function(d) {
+          console.log(d.timestamp);
+            tooltip.transition()
+                 .duration(200)
+                 .style("opacity", .9);
+            tooltip.html(xValue(d)
+  	        + ", " + yValue(d) + ")")
+                 .style("left", (d3.event.pageX + 5) + "px")
+                 .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(d) {
+            tooltip.transition()
+                 .duration(500)
+                 .style("opacity", 0);
+        });
+
   // Adds the svg canvas
-  var svg = d3.select("#chart");
+
   // d3.csv("/javascripts/energy.csv", function(error, data) { //indentation?
   //     data.forEach(function(d) {
   //         d.date  = parseDate(d.date);
