@@ -115,7 +115,7 @@ function graphData(err, data){
       .attr("r", 2.5)
       .attr("cx", function(d) { return x(parseDate(d.timestamp))})
       .attr("cy", function(d) { return y(d.temperature)})
-      .style("fill", "blue")
+      .style("fill", "#32CD32")
       // .style("stroke", "black")
       .on("mouseover", function(d) {
         console.log(d.timestamp);
@@ -240,8 +240,8 @@ function graphTemp() {
       .attr("r", 2.5)
       .attr("cx", function(d) { return x(parseDate(d.timestamp))})
       .attr("cy", function(d) { return y(d.temperature)})
-      .style("fill", "blue")
-      .style("stroke", "black")
+      .style("fill", "	#32CD32")
+      .style("stroke", "#32CD32")
       .on("mouseover", function(d) {
         console.log(d.timestamp);
           tooltip.transition()
@@ -337,8 +337,8 @@ function graphHumidity() {
         .attr("r", 2.5)
         .attr("cx", function(d) { return x(parseDate(d.timestamp))})
         .attr("cy", function(d) { return y(d.humidity)})
-        .style("fill", "blue")
-        .style("stroke", "black")
+        .style("fill", "#32CD32")
+        .style("stroke", " #32CD32")
         .on("mouseover", function(d) {
           console.log(d.timestamp);
             tooltip.transition()
