@@ -3,7 +3,7 @@ var router = express.Router();
 //
 // /* GET users listing. */
 router.get('/', function (req, res, next) {
-    res.send('respond ggg with a resource');
+    res.render('contact', { title: 'Contact RAD'});
 
 });
 

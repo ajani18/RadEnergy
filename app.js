@@ -19,7 +19,19 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var classesData = require('./routes/classesData');
 var classes = require('./routes/classes');
-var about = require('./routes/about')
+var userinfo = require('./routes/userinfo');
+// var form = require('.routes/contact');
+
+var our_project_home = require('./routes/our_project_home');
+var our_project_problem = require('./routes/our_project_problem');
+var our_project_literature = require('./routes/our_project_literature');
+var our_project_research = require('./routes/our_project_research');
+var our_project_findings = require('./routes/our_project_findings');
+var our_project_conclusions = require('./routes/our_project_conclusions');
+var our_project_bibliography = require('./routes/our_project_bibliography');
+
+
+
 //var makerSpace = require('./routes/MakerSpace');
 // var getGraph = require('./public/javascripts/dataVisual');
 
@@ -37,11 +49,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', our_project_home);
 app.use('/users', users);
 app.use('/classesdata', classesData);
 app.use('/classes', classes);
-app.use('/about', about);
+app.use('/userinfo', userinfo);
+// app.use('/contactus', contact);
+
+app.use('/our_project/home', our_project_home);
+app.use('/our_project/problem', our_project_problem);
+app.use('/our_project/literature', our_project_literature);
+app.use('/our_project/research', our_project_research);
+app.use('/our_project/findings', our_project_findings);
+app.use('/our_project/conclusions', our_project_conclusions);
+app.use('/our_project/bibliography', our_project_bibliography);
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

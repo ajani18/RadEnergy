@@ -41,15 +41,15 @@ var svg = d3.select("#chart");
 
 // Set the ranges
 function graphData(err, data){
-  liveFeedLight(data[0].lightstatus)
-  liveFeedHumidity(data[0].humidity)
-  liveFeedTemp(data[0].temperature)
-  liveFeedOccupancy(data[0].occupancystatus)
-  dailyTemp(data)
-  dailyHumid(data)
-  percentageLights(data)
+  liveFeedLight(data[0].lightstatus);
+  liveFeedHumidity(data[0].humidity);
+  liveFeedTemp(data[0].temperature);
+  liveFeedOccupancy(data[0].occupancystatus);
+  dailyTemp(data);
+  dailyHumid(data);
+  percentageLights(data);
 
-  console.log(data.length);
+  // console.log(data.length);
   storedData = data;
 
   // var d = new Date(parseDate(data[0].timestamp));
@@ -112,11 +112,11 @@ function graphData(err, data){
       .data(data)
     .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 5.5)
+      .attr("r", 2.5)
       .attr("cx", function(d) { return x(parseDate(d.timestamp))})
       .attr("cy", function(d) { return y(d.temperature)})
       .style("fill", "blue")
-      .style("stroke", "black")
+      // .style("stroke", "black")
       .on("mouseover", function(d) {
         console.log(d.timestamp);
           tooltip.transition()
@@ -225,15 +225,19 @@ function graphTemp() {
   var xValue = function (d) { return (parseDate(d.timestamp))};
   var yValue = function (d) { return (d.temperature)};
 
+  x.domain(d3.extent(data, function(d) {
+    return parseDate(d.timestamp); }));
+  y.domain([0, d3.max(data, function(d) { return d.temperature; })]);
+
   var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
   svg.selectAll(".dot")
       .data(data)
-    .enter().append("circle")
-      .attr("class", "dot")
-      .attr("r", 5.5)
+    // .enter().append("circle")
+    //   .attr("class", "dot")
+      .attr("r", 2.5)
       .attr("cx", function(d) { return x(parseDate(d.timestamp))})
       .attr("cy", function(d) { return y(d.temperature)})
       .style("fill", "blue")
@@ -266,13 +270,10 @@ function graphTemp() {
   //     });
   //
   // Scale the range of the data
-  x.domain(d3.extent(data, function(d) {
-    return parseDate(d.timestamp); }));
-  y.domain([0, d3.max(data, function(d) { return d.temperature; })]);
 
   // Add the valueline path.
-  svg.select("path.line")
-  .attr("d", valueline(data))
+  // svg.select("path.line")
+  // .attr("d", valueline(data))
 
   // Add the X Axis
   svg.select(".xaxis")
@@ -309,27 +310,31 @@ function graphHumidity() {
   .orient("left").ticks(5);
 
   //Define the line
-  var valueline = d3.svg.line()
-  .x(function(d, i) {
-    // var date = new Date();
-    // console.log(date.getDate()  );
-    return x(parseDate(d.timestamp));
-  })
-  .y(function(d) { return y(d.humidity); });
+  // var valueline = d3.svg.line()
+  // .x(function(d, i) {
+  //   // var date = new Date();
+  //   // console.log(date.getDate()  );
+  //   return x(parseDate(d.timestamp));
+  // })
+  // .y(function(d) { return y(d.humidity); });
 
 
     var xValue = function (d) { return (parseDate(d.timestamp))};
     var yValue = function (d) { return (d.humidity)};
+
+    x.domain(d3.extent(data, function(d) {
+      return parseDate(d.timestamp); }));
+    y.domain([0, d3.max(data, function(d) { return d.humidity; })]);
 
     var tooltip = d3.select("body").append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
 
     svg.selectAll(".dot")
-        .data(data)
-      .enter().append("circle")
-        .attr("class", "dot")
-        .attr("r", 5.5)
+      //   .data(data)
+      // .enter().append("circle")
+      //   .attr("class", "dot")
+        .attr("r", 2.5)
         .attr("cx", function(d) { return x(parseDate(d.timestamp))})
         .attr("cy", function(d) { return y(d.humidity)})
         .style("fill", "blue")
@@ -359,13 +364,11 @@ function graphHumidity() {
   //     });
   //
   // Scale the range of the data
-  x.domain(d3.extent(data, function(d) {
-    return parseDate(d.timestamp); }));
-  y.domain([0, d3.max(data, function(d) { return d.humidity; })]);
+
 
   // Add the valueline path.
-  svg.select("path.line")
-  .attr("d", valueline(data))
+  // svg.select("path.line")
+  // .attr("d", valueline(data))
 
   // Add the X Axis
   svg.select(".xaxis")
@@ -487,14 +490,23 @@ function percentageLights(data) {
   console.log(totalTimeLightsOn); //takes percentage of time to give amount of time on in hours
 
   var wattsPerBulb = 60;
-  kWHUsed = ((wattsPerBulb*totalTimeLightsOn) / 1000);  //kwh in 1 day for 1 bulb
-  kWHUsedSum = kWHUsed * 36;
+  var kWHUsed = ((wattsPerBulb*totalTimeLightsOn) / 1000);  //kwh in 1 day for 1 bulb
+  var kWHUsedSum = kWHUsed * 36;
   var costPerKWH = 0.12;
-  costPerDay = (kWHUsed * costPerKWH) * 36; //36 lightbulb
+  var costPerDay = (kWHUsed * costPerKWH) * 36; //36 lightbulb
 
   console.log(kWHUsed);
   console.log(kWHUsedSum);
   console.log(costPerDay);
+
+  //function kwhMeter (meter) {
+    d3.select("#kWhUsed")
+    .html(Math.round(kWHUsedSum*100) / 100 + " kWh")
+
+    d3.select("#costUsed")
+    .html("$"+ Math.round(costPerDay*100) / 100)
+
+  //}
 
 
   // hoursOn = timePassedToday * percentOn

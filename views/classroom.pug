@@ -13,8 +13,10 @@ block content
          button(type="button" class="btn btn-primary filter" onclick="graphTemp()") Temperature 
       div(id="chart" class="col-7")
       div(class="col-3" id="tracker")
-        div(class="alert alert-warning" role="alert") Total kWH Used: 
+        div(class="alert alert-warning" role="alert") Total kWH Used Today: 
           span(id="kWhUsed") 
+        div(class="alert alert-danger" role="alert") Total Cost for Today: 
+          span(id="costUsed")
     div(class="innerCenterDiv row")
       div(class="col-4")
         h4 Live Feed
@@ -37,8 +39,12 @@ block content
         
       div(class="col-4")
         h4 Recommendations 
+        
+        div(class="alert alert-danger" role="alert") Make Sure to the Temp close to the Average
+        div(class="alert alert-primary" role="alert") Keep the Humidity Steady by Opening a Window 
+        div(class="alert alert-warning" role="alert") Try to Turn off the Lights More Often  
+        div(class="alert alert-success" role="alert") If no one is in the Room, turn off the lights
           
-      
   script(src='/javascripts/d3.js')
   script(src='/javascripts/queue.js')
   script(src='/javascripts/dataVisual.js')
