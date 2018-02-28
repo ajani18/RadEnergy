@@ -30,6 +30,10 @@ var our_project_findings = require('./routes/our_project_findings');
 var our_project_conclusions = require('./routes/our_project_conclusions');
 var our_project_bibliography = require('./routes/our_project_bibliography');
 
+var education_home = require('./routes/educationhome');
+var education_tut = require('./routes/educationtut');
+var education_down = require('./routes/educationdownlaods');
+
 
 
 //var makerSpace = require('./routes/MakerSpace');
@@ -64,6 +68,9 @@ app.use('/our_project/findings', our_project_findings);
 app.use('/our_project/conclusions', our_project_conclusions);
 app.use('/our_project/bibliography', our_project_bibliography);
 
+app.use('/education/home', education_home);
+app.use('/education/tutorials', education_tut);
+app.use('/education/download', education_down);
 
 
 // catch 404 and forward to error handler

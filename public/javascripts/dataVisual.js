@@ -7,7 +7,8 @@ console.log(courseClass);
 var storedData = [];
 
 queue()
-  .defer(d3.json, "../classesdata/" + courseClass)
+  .defer(d3.json, "/Data/data.json")
+  // + courseClass)
   .await(graphData);
 
 
@@ -20,6 +21,8 @@ var parseDate = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
 var bisectDate = d3.bisector(function (d) { return parseDate(d.timestamp); }).left;
 
 var svg = d3.select("#chart");
+
+// console.log(/Data/dataText.json)
 
 // getData();
 //
@@ -418,11 +421,11 @@ function dailyTemp(data) {
 
  }
 
- function occupiedPressed() {
-    d3.select("#occupancylf")
-    .html("Occupied")
- }
-
+ // function occupiedPressed() {
+ //    d3.select("#occupancylf")
+ //    .html("Occupied")
+ // }
+ //
 
 function dailyHumid(data) {
 
@@ -499,22 +502,14 @@ function percentageLights(data) {
   console.log(kWHUsedSum);
   console.log(costPerDay);
 
-  //function kwhMeter (meter) {
+
     d3.select("#kWhUsed")
     .html(Math.round(kWHUsedSum*100) / 100 + " kWh")
 
     d3.select("#costUsed")
     .html("$"+ Math.round(costPerDay*100) / 100)
-
-  //}
-
-
-  // hoursOn = timePassedToday * percentOn
-
-  // console.log(hoursOn);
-
-
 }
+// }
 
 function liveFeedLight(lightLvL) {
   d3.select("#lightlf")
@@ -530,6 +525,8 @@ function liveFeedTemp(TempLvL) {
   d3.select("#templf")
   .html(TempLvL)
 }
+
+
 
 function liveFeedOccupancy(OccupancyLvL) {
   d3.select("#occupancylf")

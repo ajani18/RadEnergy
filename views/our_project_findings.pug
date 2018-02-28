@@ -72,7 +72,7 @@ html
               li
                 a(href='/our_project/home') Our Project
               li
-                a(href='/education') Education
+                a(href='/education/home') Education
               li
                 a(href='/userinfo') Contact Us
               li
@@ -91,8 +91,6 @@ html
                 |For about a month RAD Energy Console prototype has been in the makerspace collecting data. The data collected provides a holistic understanding on the energy habits of the makerspace.  The data gathered includes temperature, relative humidity, occupancy, and light status. The DHT11 temperature and humidity sensor was able to provide insight to how the temperature and humidity fluctuated each day. The sensor measures live temperature in Fahrenheit and the relative humidity,
                 |which is amount of the moisture in the air compared to what the air can hold. Light status and occupancy in the makerspace were collected to find the duration the lights are on and whether someone is in the makerspace. The primary problem was finding a good position in the makerspace to place the prototype. This was important to get a good view on the class to track occupancy. The occupancy data is not very accurate and there have been new tests to find the best placement to
                 |get the most accurate reading.
-              p
-                |*insert data table + graph*
               h3 Interpretation and Discussion
               p
                 |Above is the raw data collected of the makerspace from November 15th to December 1st. the data above is the average raw data from the days the prototype collected data. The reason to choose the average is, one, for convenience. At this moment, the prototype has collected and stored over 24,000 data points, many of which are repeats. Taking average for temperature and humidity provides an easy summary to understand the energy statistics that occurred each day without showing
@@ -125,24 +123,23 @@ html
           .clr
       #footerblurb
         #footerblurb-inner
+          .feature
+            h2(align="center") Who is RAD? Meet the Team
           .column
-            h2
-              span Heading
-            p
-              script.
-                generateText(2)
+            h2(align="center") R- Royden Lynch (Head Database Engineer)
+            P  
+              |Royden has been part of the several aspects of the project. 
+              |Particularly is the creating the database and developing the dashbaord. 
+          .column 
+            h2(align="center") A - Abhishek Jani (Head Software Engineer)
+            p 
+              |Abhi has been developing the dashboard since day 1. 
+              |He was able to take the data from the pis and put in user friendly website.
           .column
-            h2
-              span Heading
-            p
-              script.
-                generateText(2)
-          .column
-            h2
-              span Heading
-            p
-              script.
-                generateText(2)
+            h2(align="center") D - Dylon Hill (Head Electrical Engineer)
+            p 
+              |Dylon has been working intensely with the Pis and its circuitry. 
+              |He was able to successfully take key statistics from a room and send it to a database.
           .clr
       footer#footer
         #footer-inner

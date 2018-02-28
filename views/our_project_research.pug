@@ -72,9 +72,9 @@ html
               li
                 a(href='/our_project/home') Our Project
               li
-                a(href='/education') Education
+                a(href='/education/home') Education
               li
-                a(href='/contact') Contact Us
+                a(href='/userinfo') Contact Us
               li
                 a(href='/classes/makerspace') Energy Monitor 
           .clr
@@ -95,15 +95,13 @@ html
               p
                 |The project is made up of many variables including change in humidity/temperature, occupancy/light status, and amount of energy being consumed.
               p
-                |*insert image
+              
               p •    The instrument circled in red above is the night vision camera. Through the magical powers of coding, we were able to convert the camera into an occupancy sensor. This was done by having a function take a picture in the code which was defined by the change in pixels in a given border of the camera’s frame. This is ultimately used to send points to the database whether someone is in the classroom or not.
               p •    The instrument circled in green is the temperature/humidity sensor. This DHT11 sensor doubles as a humidity and temperature sensor, which are intended to send their current status to the database where the data well be filtered in a more meaningful way. This data being collected is some of the most significant because weather control is where the most amount of energy consumption occurs.
               p •    The instrument circled in yellow is the light sensor. This is a simple sensor which indicates whether the lights are on or off. The sole purpose of the light sensor is to communicate with the occupancy sensor. So that if the occupancy sensor detected that the room was empty and the lights were on then it would send a message to the teacher of the room.
               p •    The instrument circled in blue is the Raspberry Pi Zero. This is the most important part of the project because this minicomputer is what will be storing and sending all of our data to the database. It is also used to write and run the code for all of the sensors attached.
               p •    The instrument circled in magenta is the breadboard where all of the sensor and pins of the Raspberry Pi are connected.
               h3 Statistical Procedures
-              p
-                |*insert image
               p
                 |We are primarily using mean, standard deviation, and z-score as our statistical methods to truly understand Newman’s energy consumption. We are using mean as a way to measure the amount of electricity being used per month and year. It provides a more accurate measurement compared to the median because mean is more heavily influenced by outliers, which means any outliers will be taken into account with the mean. The way we measure our success is to calculate the z-score compared
                 |to average electricity usage per month and see if the number turns out to be negative. Thus, if the number is negative then that particular month’s electricity usage is smaller than the average monthly electricity usage.
@@ -138,24 +136,23 @@ html
           .clr
       #footerblurb
         #footerblurb-inner
+          .feature
+            h2(align="center") Who is RAD? Meet the Team
           .column
-            h2
-              span Heading
-            p
-              script.
-                generateText(2)
+            h2(align="center") R- Royden Lynch (Head Database Engineer)
+            P  
+              |Royden has been part of the several aspects of the project. 
+              |Particularly is the creating the database and developing the dashbaord. 
+          .column 
+            h2(align="center") A - Abhishek Jani (Head Software Engineer)
+            p 
+              |Abhi has been developing the dashboard since day 1. 
+              |He was able to take the data from the pis and put in user friendly website.
           .column
-            h2
-              span Heading
-            p
-              script.
-                generateText(2)
-          .column
-            h2
-              span Heading
-            p
-              script.
-                generateText(2)
+            h2(align="center") D - Dylon Hill (Head Electrical Engineer)
+            p 
+              |Dylon has been working intensely with the Pis and its circuitry. 
+              |He was able to successfully take key statistics from a room and send it to a database.
           .clr
       footer#footer
         #footer-inner

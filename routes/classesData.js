@@ -22,7 +22,7 @@ router.get('/makerspace', function (req, res, next) {
             if (err) { return console.dir(err); }
             var collection = db.collection('makerspace');
             //new ISODate("2017-11-21T00:00:00Z")
-            collection.find().sort({ "timestamp": -1 }).limit(10000).toArray(function (err, dataMakerSpace) {
+            collection.find().sort({ "timestamp": -1 }).limit(7000).toArray(function (err, dataMakerSpace) {
                 res.json(dataMakerSpace);
             });
         });
