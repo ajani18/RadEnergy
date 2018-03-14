@@ -47,12 +47,12 @@ a {
 
 h1 {
    text-align: center;
-   background-color:  #04ef53;
+     /* background-color:  #303030; */
  }
 
 #wrapper {
 
-    background-color:  #f9fafc;
+    /* background-color:  #303030; */
 
 }
 
@@ -77,6 +77,11 @@ title {
 
   background-color:  #d580ff;
 
+}
+
+#kWhUsed {
+
+  border-color: red;
 }
 
 

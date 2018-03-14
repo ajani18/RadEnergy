@@ -34,6 +34,8 @@ var education_home = require('./routes/educationhome');
 var education_tut = require('./routes/educationtut');
 var education_down = require('./routes/educationdownlaods');
 
+var mrjones = require('./routes/malis');
+
 
 
 //var makerSpace = require('./routes/MakerSpace');
@@ -71,6 +73,8 @@ app.use('/our_project/bibliography', our_project_bibliography);
 app.use('/education/home', education_home);
 app.use('/education/tutorials', education_tut);
 app.use('/education/download', education_down);
+
+app.use('/mrjones', mrjones)
 
 
 // catch 404 and forward to error handler

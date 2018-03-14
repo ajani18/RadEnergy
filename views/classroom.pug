@@ -11,11 +11,13 @@ block content
          button(type="button" class="btn btn-primary filter" onclick="graphHumidity()") Humidity
          h4 Press Any Button to Change the Graph 
          button(type="button" class="btn btn-primary filter" onclick="graphTemp()") Temperature 
+         p
+         button(type="button" class="btn btn-primary filter" onclick="alertFunc()") Important Info 
       div(id="chart" class="col-7")
       div(class="col-3" id="tracker")
         div(class="alert alert-warning" role="alert") Total kWH Used Today: 
           span(id="kWhUsed") 
-        div(class="alert alert-danger" role="alert") Total Cost for Today: 
+        div(class="alert alert-danger" role="alert") Total Cost for Today:
           span(id="costUsed")
     div(class="innerCenterDiv row")
       div(class="col-4")
@@ -33,18 +35,22 @@ block content
         h4 Daily Stats 
         div(class="alert alert-danger" role="alert") Average Temperature:
           span(id="AverageTemp")
-        div(class="alert alert-primary" role="alert") Average Humidity:
+        div(class="alert alert-primary" role="alert") Average Humidity: 
           span(id="averageHumid")
   
         
       div(class="col-4")
         h4 Recommendations 
         
-        div(class="alert alert-danger" role="alert") Make Sure to the Temp close to the Average
+        div(class="alert alert-danger" role="alert") Make Sure to Set the Temp close to the Average
         div(class="alert alert-primary" role="alert") Keep the Humidity Steady by Opening a Window 
         div(class="alert alert-warning" role="alert") Try to Turn off the Lights More Often  
-        div(class="alert alert-success" role="alert") If no one is in the Room, turn off the lights
+        div(class="alert alert-success" role="alert") Make Sure to Unplug Uneccessary Devices 
           
   script(src='/javascripts/d3.js')
   script(src='/javascripts/queue.js')
   script(src='/javascripts/dataVisual.js')
+  script.
+    function alertFunc() {
+    confirm("If you see big gap in the graph it means the RAD Console was off during that period.");
+    } 

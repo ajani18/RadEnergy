@@ -1,0 +1,36 @@
+extends layout
+
+block content
+
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    a.navbar-brand(href='#') Statistics 
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        span.sr-only (current)
+        li.nav-item.dropdown
+          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            | Choose Graph 
+          .dropdown-menu(aria-labelledby='navbarDropdown')
+            a.dropdown-item(href='#' onclick="graphHumidity()") Humidity
+            a.dropdown-item(href='#') Temperature
+            a.dropdown-item(href='#') Occupancy
+            a.dropdown-item(href='#') Cost 
+            a.dropdown-item(href='#') Light Status
+            a.dropdown-item(href='#') kWh
+      ul.navbar-nav.mr-auto
+        span.sr-only (current)
+        li.nav-item.dropdown
+          a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            | Choose Time Period
+          .dropdown-menu(aria-labelledby='navbarDropdown')
+            a.dropdown-item(href='#') Hourly 
+            a.dropdown-item(href='#') Daily 
+            a.dropdown-item(href='#') Monthly 
+            a.dropdown-item(href='#') Yearly 
+    h4 RADEnergy 
+      div(id="chart")
+      script(src='/javascripts/d3.js')
+      script(src='/javascripts/queue.js')
+      script(src='/javascripts/dataVisual2.js')

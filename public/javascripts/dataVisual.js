@@ -7,7 +7,7 @@ console.log(courseClass);
 var storedData = [];
 
 queue()
-  .defer(d3.json, "/Data/data.json")
+  .defer(d3.json, "../classesdata/" + courseClass) //"/Data/data.json")
   // + courseClass)
   .await(graphData);
 
@@ -398,7 +398,7 @@ function dailyTemp(data) {
   var today = new Date();
   console.log(today)
   var docDate = parseDate(data[0].timestamp);
-
+  //console.log(docDate)
   var sumTemp = 0;
   var numDocs = 0;
 
