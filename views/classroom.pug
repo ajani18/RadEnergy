@@ -2,55 +2,74 @@ extends layout
 
 block content
 
-  h1= title
-  p Welcome to #{title}
-
-  div(class="centerDiv")
-    div(class="innerCenterDiv row")
+  div(class="centerDiv2")
+    div(class="innerCenterDiv2 row")
       div(id="filterSide" class="col-2")
-         button(type="button" class="btn btn-primary filter" onclick="graphHumidity()") Humidity
+         button(type="button" class="btn btn-info filter" onclick="graphHumidity()") Humidity
          h4 Press Any Button to Change the Graph 
-         button(type="button" class="btn btn-primary filter" onclick="graphTemp()") Temperature 
+         button(type="button" class="btn btn-info filter" onclick="graphTemp()") Temperature 
          p
-         button(type="button" class="btn btn-primary filter" onclick="alertFunc()") Important Info 
-      div(id="chart" class="col-7")
+         button(type="button" class="btn btn-danger filter" onclick="alertFunc()") Important Info 
+      div(class="col-7")
+        div(id="chart")
+        div(id="chartLight")
       div(class="col-3" id="tracker")
+        a(href="/classes/mrjones" class="btn btn-danger filter" type="button") Mr. Jones
+        a(href="/classes/makerspace" class="btn btn-danger filter" type="button") Makerspace
+        p
         div(class="alert alert-warning" role="alert") Total kWH Used Today: 
           span(id="kWhUsed") 
         div(class="alert alert-danger" role="alert") Total Cost for Today:
           span(id="costUsed")
-    div(class="innerCenterDiv row")
-      div(class="col-4")
-        h4 Live Feed
-        div(class="alert alert-danger" role="alert") Temperature: 
-          span(id="templf")
-        div(class="alert alert-primary" role="alert") Humidity: 
-              span(id="humiditylf")
-        div(class="alert alert-warning" role="alert") Light: 
-          span(id="lightlf") 
-        div(class="alert alert-success" role="alert") Occupancy: 
-          span(id="occupancylf")
-          span(id="Occupancy") 
-      div(class="col-4")
-        h4 Daily Stats 
-        div(class="alert alert-danger" role="alert") Average Temperature:
-          span(id="AverageTemp")
-        div(class="alert alert-primary" role="alert") Average Humidity: 
-          span(id="averageHumid")
-  
-        
-      div(class="col-4")
-        h4 Recommendations 
-        
-        div(class="alert alert-danger" role="alert") Make Sure to Set the Temp close to the Average
-        div(class="alert alert-primary" role="alert") Keep the Humidity Steady by Opening a Window 
-        div(class="alert alert-warning" role="alert") Try to Turn off the Lights More Often  
-        div(class="alert alert-success" role="alert") Make Sure to Unplug Uneccessary Devices 
-          
+          p
+      #row
+      #accordion
+        .card
+          #headingOne.card-header
+            h5.mb-0
+              button.btn.btn-link(data-toggle='collapse', data-target='#collapseOne', aria-expanded='true', aria-controls='collapseOne')
+                | STATS ABOUT THE ROOM 
+          #collapseOne.collapse.show(aria-labelledby='headingOne', data-parent='#accordion')
+            .card-body
+              div(class="col-12 alert alert-danger" role="alert") Temperature: 
+                    span(id="templf")
+              div(class="col-12 alert alert-primary" role="alert") Humidity: 
+                    span(id="humiditylf")
+              div(class="alert alert-warning" role="alert") Light: 
+                    span(id="lightlf") 
+              div(class="alert alert-success" role="alert") Occupancy: 
+                    span(id="occupancylf")
+                    span(id="Occupancy")
+        .card
+          #headingTwo.card-header
+            h5.mb-0
+              button.btn.btn-link.collapsed(data-toggle='collapse', data-target='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo')
+                | RECOMMENDATIONS 
+          #collapseTwo.collapse(aria-labelledby='headingTwo', data-parent='#accordion')
+            .card-body
+              #recommendations
+              div(class="alert alert-danger" role="alert" id="rec1") To See More Solution On How to Make Your Room More Green, Go to Our Education Page 
+              //- div(class="alert alert-primary" role="alert" id="rec2") Keep the Humidity Steady by Opening a Window 
+              //- div(class="alert alert-warning" role="alert" id="rec1") Try to Turn off the Lights More Often  
+              //- div(class="alert alert-success" role="alert") Make Sure to Unplug Uneccessary Devices 
+              //- 
+        .card
+          #headingThree.card-header
+            h5.mb-0
+              button.btn.btn-link.collapsed(data-toggle='collapse', data-target='#collapseThree', aria-expanded='false', aria-controls='collapseThree')
+                | AVERAGES
+          #collapseThree.collapse(aria-labelledby='headingThree', data-parent='#accordion')
+            .card-body
+              div(class="alert alert-danger" role="alert") Average Temperature:
+                span(id="AverageTemp")
+              div(class="alert alert-primary" role="alert") Average Humidity: 
+                span(id="averageHumid") 
+                
+                
   script(src='/javascripts/d3.js')
   script(src='/javascripts/queue.js')
   script(src='/javascripts/dataVisual.js')
   script.
     function alertFunc() {
-    confirm("If you see big gap in the graph it means the RAD Console was off during that period.");
+    confirm("If you see big gap or gray in the graph it means the RAD Console was off during that period.");
     } 

@@ -1,0 +1,58 @@
+extends layout
+
+block content
+
+  div(class="centerDiv")
+    div(class="innerCenterDiv row")
+      div(id="filterSide" class="col-2")
+         button(type="button" class="btn btn-primary filter" onclick="graphHumidity()") Humidity
+         h4 Press Any Button to Change the Graph 
+         button(type="button" class="btn btn-primary filter" onclick="graphTemp()") Temperature 
+         p
+         button(type="button" class="btn btn-primary filter" onclick="alertFunc()") Important Info 
+      div(id="chart" class="col-7")
+      div(class="col-3" id="tracker")
+        div(class="alert alert-warning" role="alert") Total kWH Used Today: 
+          span(id="kWhUsed") 
+        div(class="alert alert-danger" role="alert") Total Cost for Today:
+          span(id="costUsed")
+          p
+    div(class="innerCenterDiv row")
+        div(class="col-12")
+          div(class="alert alert-danger" role="alert") Hello
+          p
+            div(class="col-12")
+              p
+              h4 Live Feed
+              div(class="col-6 alert alert-danger" role="alert") Temperature: 
+                span(id="templf")
+              div(class="col-6 alert alert-primary" role="alert") Humidity: 
+                    span(id="humiditylf")
+          div(class="alert alert-warning" role="alert") Light: 
+            span(id="lightlf") 
+          div(class="alert alert-success" role="alert") Occupancy: 
+            span(id="occupancylf")
+            span(id="Occupancy") 
+        div(class="col-4")
+          h4 Daily Stats 
+          div(class="alert alert-danger" role="alert") Average Temperature:
+            span(id="AverageTemp")
+          div(class="alert alert-primary" role="alert") Average Humidity: 
+            span(id="averageHumid")
+    
+          
+        div(class="col-4")
+          h4 Recommendations 
+          
+          div(class="alert alert-danger" role="alert") Make Sure to Set the Temp close to the Average
+          div(class="alert alert-primary" role="alert") Keep the Humidity Steady by Opening a Window 
+          div(class="alert alert-warning" role="alert") Try to Turn off the Lights More Often  
+          div(class="alert alert-success" role="alert") Make Sure to Unplug Uneccessary Devices 
+          
+  script(src='/javascripts/d3.js')
+  script(src='/javascripts/queue.js')
+  script(src='/javascripts/dataVisual.js')
+  script.
+    function alertFunc() {
+    confirm("If you see big gap in the graph it means the RAD Console was off during that period.");
+    } 

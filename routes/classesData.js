@@ -13,6 +13,7 @@ router.get('/mrjones', function (req, res, next) {
             var collection = db.collection('MrJones');
             collection.find().sort({ "timestamp": -1 }).toArray(function (err, dataJones) {
                 res.json(dataJones); //
+            db.close();
             });
         });
 }); //allows classesdata

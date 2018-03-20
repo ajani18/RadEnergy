@@ -51,6 +51,7 @@ function graphData(err, data){
   dailyTemp(data);
   dailyHumid(data);
   percentageLights(data);
+  recommendations(data);
 
   // console.log(data.length);
   storedData = data;
@@ -199,6 +200,105 @@ function graphData(err, data){
   // }
 
   // });
+  graphLight(data);
+}
+
+function graphLight(data) {
+
+    var svg = d3.select("#chartLight")
+
+    var x = d3.time.scale().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+    // Define the axes
+    var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(5);
+
+    var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5);
+
+    // Define the line
+    // var valueline = d3.svg.line()
+    // .x(function(d, i) {
+    //   // var date = new Date();
+    //   // console.log(date.getDate()  );
+    //   return x(parseDate(d.timestamp));
+    // })
+    // .y(function(d) { return y(d.temperature); });
+
+    // Adds the svg canvas
+    var svg2 = d3.select("#chartLight")
+    .append("svg")
+    // .attr("id", "bigGraph")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+    "translate(" + margin.left + "," + margin.top + ")");
+
+    // d3.csv("/javascripts/energy.csv", function(error, data) { //indentation?
+    //     data.forEach(function(d) {
+    //         d.date  = parseDate(d.date);
+    //         d.close = +d.close;
+    //     });
+    //
+    // Scale the range of the data
+    x.domain(d3.extent(data, function(d) {
+      return parseDate(d.timestamp); }));
+    y.domain([0, d3.max(data, function(d) { return d.temperature; })]);
+
+    // Add the valueline path.
+    var xValue = function (d) { return (parseDate(d.timestamp))};
+    var yValue = function (d) { return (d.lightstatus)};
+
+    var tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+
+    svg2.append("rect")
+    .attr("x", 0)
+    .attr("y", 29.5)
+    .attr("width", width)
+    .attr("height", 90)
+    .style("fill", "gray")
+
+    svg2.selectAll(".bars")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bars")
+        // .attr("r", 2.5)
+        .attr("x", function(d) { return x(parseDate(d.timestamp))})
+      //  .attr("cy", function(d) { return y(d.temperature)})
+        .attr("y", 30)
+        .attr("height", 90)
+        .attr("width", 10)
+        .style("fill",  function(d) {
+          if (d.lightstatus == "on")
+            return "yellow"
+          else
+            return "black"
+        })
+        // .style("stroke", "black")
+        .on("mouseover", function(d) {
+          console.log(d.timestamp);
+            tooltip.transition()
+                 .duration(200)
+                 .style("opacity", .9);
+            tooltip.html(xValue(d)
+            + ", " + yValue(d) + ")")
+                 .style("left", (d3.event.pageX + 5) + "px")
+                 .style("top", (d3.event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(d) {
+            tooltip.transition()
+                 .duration(500)
+                 .style("opacity", 0);
+        });
+
+
+
+
 }
 
 function graphTemp() {
@@ -415,7 +515,7 @@ function dailyTemp(data) {
 
 
    d3.select("#AverageTemp")
-   .html(Math.round(AverageTemp*100) / 100)
+   .html(Math.round(AverageTemp*100) / 100 + "°F")
 
 
 
@@ -447,7 +547,7 @@ function dailyHumid(data) {
    console.log(sumHumidity/numDocs);
 
    d3.select("#averageHumid")
-   .html(Math.round(AverageHumidity*100) / 100)
+   .html(Math.round(AverageHumidity*100) / 100 + "%")
 
 }
 
@@ -518,17 +618,54 @@ function liveFeedLight(lightLvL) {
 
 function liveFeedHumidity(HumidityLvL) {
   d3.select("#humiditylf")
-  .html(HumidityLvL)
+  .html(HumidityLvL + "%")
 }
 
 function liveFeedTemp(TempLvL) {
   d3.select("#templf")
-  .html(TempLvL)
+  .html(TempLvL + "°F")
 }
-
 
 
 function liveFeedOccupancy(OccupancyLvL) {
   d3.select("#occupancylf")
   .html(OccupancyLvL)
+}
+
+
+function recommendations(data) {
+
+  var temp = data[0].temperature
+  var humid = data[0].humidity
+  var lightstatus = data[0].lightstatus
+  var occupancy = data[0].occupancystatus
+
+  var rec = '';
+  if (temp > 78) {
+      //r
+      rec += '<div class="alert alert-danger" role="alert" id="rec1">Turn Down Temperature to Improve Student Learning</div>'
+  } else if (temp < 70) {
+
+      rec += '<div class="alert alert-danger" role="alert" id="rec1">Turn Up Temperature to Improve Student Learning</div>'
+  }
+
+  if (humid > 75) {
+
+    rec += '<div class="alert alert-primary" role="alert" id="rec1">Open Door or Window to Turn Down Temperature</div>'
+  } else if (humid < 35) {
+
+    rec += '<div class="alert alert-primary" role="alert" id="rec1">Make Sure to Turn Up Humidity for Comfort </div>'
+  }
+
+  if (occupancy == "Unoccupied" && lightstatus == "on") {
+    rec += '<div class="alert alert-success" role="alert" id="rec1"> Make Sure to Turn Off Lights Because Room is Unoccupied</div>'
+  }
+  // if
+  // } else if (temp < 70) {
+  //     rec +
+  // }
+
+  d3.select("#recommendations")
+  .html(rec);
+   //<div class="alert alert-danger" role="alert" id="rec1">stuff</div>
 }

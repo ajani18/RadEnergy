@@ -84,5 +84,44 @@ title {
   border-color: red;
 }
 
+#accordion {
 
+  width: 100%;
+
+}
+
+#top-nav ul li ul {
+
+    display: block;
+    position: absolute;
+    background-color: #fff;
+}
+
+#page {
+  width: 100%;
+}
+
+#top-nav ul li ul {
+
+    display: block;
+    position: absolute;
+    background-color: #fff;
+}
+
+#top-nav ul li ul li a {
+    padding: 12px 14px;
+}
+
+#logo {
+  position: absolute;
+  /* margin-left: -15px; */
+  /* margin-top: -5px; */
+  left:30px;
+  top:10px;
+
+}
+
+#header-inner {
+  height: 100px
+}
 /* class . id # */
