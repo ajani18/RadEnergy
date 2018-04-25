@@ -48,7 +48,7 @@ block content
           #collapseTwo.collapse(aria-labelledby='headingTwo', data-parent='#accordion')
             .card-body
               #recommendations
-              div(class="alert alert-danger" role="alert" id="rec1") To See More Solution On How to Make Your Room More Green, Go to Our Education Page 
+              div(class="alert alert-danger" role="alert" id="rec1") To See More Solutions to Make Your Room More Green, Go to Our Education Page 
               //- div(class="alert alert-primary" role="alert" id="rec2") Keep the Humidity Steady by Opening a Window 
               //- div(class="alert alert-warning" role="alert" id="rec1") Try to Turn off the Lights More Often  
               //- div(class="alert alert-success" role="alert") Make Sure to Unplug Uneccessary Devices 
@@ -71,5 +71,5 @@ block content
   script(src='/javascripts/dataVisual.js')
   script.
     function alertFunc() {
-    confirm("If you see big gap or gray in the graph it means the RAD Console was off during that period.");
+    confirm("Light Graph: Yellow - Light On, Gray - Data Not Collected, Black - Light off; Big Gap in Scatter Plot Means No Data Was Collected at that Time");
     } 

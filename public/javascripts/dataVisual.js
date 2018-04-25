@@ -256,12 +256,62 @@ function graphLight(data) {
       .style("opacity", 0);
 
 
+
     svg2.append("rect")
-    .attr("x", 0)
-    .attr("y", 29.5)
+    .attr("x", x)
+    .attr("y", 29.9)
     .attr("width", width)
     .attr("height", 90)
     .style("fill", "gray")
+
+// var xlegend = 0;
+// var xSpace = 50;
+// var ylegend = 150;
+// var ylegendTxt = 155;
+//
+//     svg2.append("rect")
+//     .attr("x", xlegend)
+//     .attr("y", ylegend)
+//     .attr("width", 20)
+//     .attr("height", 20)
+//     .style("fill", "gray")
+//
+//     xlegend += 25;
+//     svg2.append("text")
+//     .attr("x", xlegend)
+//     .attr("y", ylegendTxt)
+//     .style("fill", "gray")
+//     .text("No Data")
+//
+//     xlegend += 50;
+//     svg2.append("rect")
+//     .attr("x", xlegend)
+//     .attr("y", ylegend)
+//     .attr("width", 20)
+//     .attr("height", 20)
+//     .style("fill", "yellow")
+//
+//     xlegend += 25;
+//     svg2.append("text")
+//     .attr("x", xlegend)
+//     .attr("y", ylegendTxt)
+//     .style("fill", "gray")
+//     .text("Lights On")
+//
+//     xlegend += 50;
+//     svg2.append("rect")
+//     .attr("x", xlegend)
+//     .attr("y", ylegend)
+//     .attr("width", 20)
+//     .attr("height", 20)
+//     .style("fill", "black")
+//
+//     xlegend += 25;
+//     svg2.append("text")
+//     .attr("x", xlegend)
+//     .attr("y", ylegendTxt)
+//     .style("fill", "gray")
+//     .text("Lights Off")
 
     svg2.selectAll(".bars")
         .data(data)
